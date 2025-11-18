@@ -125,11 +125,15 @@ ggplot(single, aes(x = magi_low, xend = magi_high, y = total_premium * 12)) +
   theme(axis.title.y = element_text(angle = 0, vjust = 0.5, hjust = 0))
 ```
 
-The five vertical jumps in the plots are the IRMAA cutoffs. Instead of the annual premium in dollars, we could look at the premium *rate*, the percentage of income that is paid in medicare premiums.
+The five vertical jumps in the plots are the IRMAA cutoffs. 
+
+<!--
+Instead of the annual premium in dollars, we could look at the premium *rate*, the percentage of income that is paid in medicare premiums.
+-->
 
 ```{r create_premium_ratedata}
 #| include: false
-dd <- tibble(magi = 0:6e5)
+dd <- tibble(magi = 0:7e5)
 
 dd2 <- dd %>%
   left_join(
@@ -169,7 +173,7 @@ dd5 %>%
   geom_line(data = dd5 %>% filter(rate_type == "premium", between(magi, 200001, 500000))) +
   geom_line(data = dd5 %>% filter(rate_type == "premium", magi >= 501000)) +
   theme_minimal() +
-  expand_limits(y = 0, x = 600000) +
+  expand_limits(y = 0, x = 700000) +
   scale_y_continuous(labels = label_percent(), breaks = pretty_breaks(7)) +
   scale_x_continuous(labels = label_currency(suffix = "K", scale = .001), breaks = pretty_breaks(9)) +
   #geom_point(aes(x = magi_low, y = total_premium * 12)) +
@@ -182,7 +186,47 @@ dd5 %>%
   theme(axis.title.y = element_text(angle = 0, vjust = 0.5))
 ```
 
-This funny looking plot shows the 
+Most of the tax code doesn't work this way. Here are the 2025 federal income tax rates for single filers:
+
+```{r single_tax_rates}
+single_income_rates <- tribble(
+  ~income_low, ~income_high, ~rate, 
+  0, 11925, 0.10,
+  11926, 48475, 0.12,
+  48476, 103350, 0.22,
+  103351, 197300, 0.24,
+  197301, 250525, 0.32,
+  250526, 626350, 0.35,
+  626351, Inf, 0.37
+) %>% print
+
+gt(single_income_rates)
+
+ii <- tibble(income = 0:7e5)
+
+# show plot of income tax rates
+ii2 <- ii %>%
+  mutate(
+    income_tax = 0.1 * pmin(income, 11925) + 0.12 * pmin(income - 11925, 48476)
+  ) %>% 
+  print
+    
+    dd2 <- dd %>%
+  left_join(
+    single %>% select(magi_low, total_premium),
+    by = c("magi"="magi_low")
+  )
+
+dd3 <- dd2 %>%
+  fill(total_premium) %>%
+  mutate(
+    annual_premium = total_premium * 12,
+    premium_rate = annual_premium / magi
+    ) 
+
+```
+
+
 
 <!-- So most beneficiaries pay \$185 x 12 = \$2,220 per year and *very* high earners pay \$628.90 x 12 = #\$7,546.8 per year for Medicare Part B. -->
 
