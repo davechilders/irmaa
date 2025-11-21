@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Many retirees have a misconception that Medicare coverage is free. While Medicare A (insurance for hospital stays) is free for most people, there are monthly premiums for Medicare B (outpatient care) and Medicare Part D (prescription drugs).</p>
 <p>Let’s look at a table for the common monthly premiums for the different medicare coverages:</p>
-<p>Created at 2025-11-17 20:46:32.823252</p>
+<p>Created at 2025-11-21 15:58:37.203169</p>
 <p>some text here</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>doc_emoji <span class="ot">&lt;-</span> emoji<span class="sc">::</span>emojis <span class="sc">%&gt;%</span></span>
@@ -128,38 +128,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>In 2025, $185 is the lowest monthly premium for Part B Medicare Coverage. Individuals and couples with high incomes have to pay an income-related monthly adjustment amount (IRMAA).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>part_b <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>year, <span class="sc">~</span>premium, <span class="sc">~</span>deductible,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2024</span>L, <span class="fl">174.70</span>, <span class="dv">240</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>L, <span class="fl">185.00</span>, <span class="dv">257</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># part_b &lt;- tribble(</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   ~year, ~premium, ~deductible,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   2024L, 174.70, 240,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   2025L, 185.00, 257</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Based on MAGI</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>part_b_irmaa <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>year, <span class="sc">~</span>filing, <span class="sc">~</span>magi_low, <span class="sc">~</span>magi_high, <span class="sc">~</span>adjustment,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Part B - Single</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"single"</span>, <span class="dv">0</span>, <span class="dv">106000</span>, <span class="dv">0</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"single"</span>, <span class="dv">106001</span>, <span class="dv">133000</span>, <span class="dv">74</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"single"</span>, <span class="dv">133001</span>, <span class="dv">167000</span>, <span class="dv">185</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"single"</span>, <span class="dv">167001</span>, <span class="dv">200000</span>, <span class="fl">295.90</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"single"</span>, <span class="dv">200001</span>, <span class="dv">500000</span>, <span class="fl">406.90</span>,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"single"</span>, <span class="dv">500001</span>, <span class="cn">Inf</span>, <span class="fl">443.90</span>,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Part B - MFJ</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfj"</span>, <span class="dv">0</span>, <span class="dv">212000</span>, <span class="dv">0</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfj"</span>, <span class="dv">212001</span>, <span class="dv">266000</span>, <span class="dv">74</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfj"</span>, <span class="dv">266001</span>, <span class="dv">334000</span>, <span class="dv">185</span>,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfj"</span>, <span class="dv">334001</span>, <span class="dv">400000</span>, <span class="fl">295.90</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfj"</span>, <span class="dv">400001</span>, <span class="dv">750000</span>, <span class="fl">406.90</span>,</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfj"</span>, <span class="dv">750001</span>, <span class="cn">Inf</span>, <span class="fl">443.90</span>,</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Part B - MFS</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfs"</span>, <span class="dv">0</span>, <span class="dv">106000</span>, <span class="dv">0</span>,</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfs"</span>, <span class="dv">106001</span>, <span class="dv">394000</span>, <span class="fl">406.90</span>,</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2025</span>, <span class="st">"mfs"</span>, <span class="dv">394001</span>, <span class="cn">Inf</span>, <span class="fl">443.90</span>,</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_premium =</span> adjustment <span class="sc">+</span> part_b <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2025</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(premium))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(premiums_b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>part_b_irmaa <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>irmaa <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(filing <span class="sc">==</span> <span class="st">"single"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">magi =</span> <span class="fu">paste</span>(scales<span class="sc">::</span><span class="fu">dollar</span>(magi_low), scales<span class="sc">::</span><span class="fu">dollar</span>(magi_high), <span class="at">sep =</span> <span class="st">" - "</span>),</span>
@@ -178,23 +156,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_premium =</span> <span class="fu">md</span>(<span class="st">"Part B&lt;br&gt;Monthly Premium"</span>)</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="bvsnauirvr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bvsnauirvr table {
+<div id="noumugsayn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#noumugsayn table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bvsnauirvr thead, #bvsnauirvr tbody, #bvsnauirvr tfoot, #bvsnauirvr tr, #bvsnauirvr td, #bvsnauirvr th {
+#noumugsayn thead, #noumugsayn tbody, #noumugsayn tfoot, #noumugsayn tr, #noumugsayn td, #noumugsayn th {
   border-style: none;
 }
 
-#bvsnauirvr p {
+#noumugsayn p {
   margin: 0;
   padding: 0;
 }
 
-#bvsnauirvr .gt_table {
+#noumugsayn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -220,12 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_caption {
+#noumugsayn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bvsnauirvr .gt_title {
+#noumugsayn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -237,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#bvsnauirvr .gt_subtitle {
+#noumugsayn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -249,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#bvsnauirvr .gt_heading {
+#noumugsayn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -261,13 +239,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_bottom_border {
+#noumugsayn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_col_headings {
+#noumugsayn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -282,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_col_heading {
+#noumugsayn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -302,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#bvsnauirvr .gt_column_spanner_outer {
+#noumugsayn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -314,15 +292,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#bvsnauirvr .gt_column_spanner_outer:first-child {
+#noumugsayn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bvsnauirvr .gt_column_spanner_outer:last-child {
+#noumugsayn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bvsnauirvr .gt_column_spanner {
+#noumugsayn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -334,11 +312,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#bvsnauirvr .gt_spanner_row {
+#noumugsayn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bvsnauirvr .gt_group_heading {
+#noumugsayn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -364,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#bvsnauirvr .gt_empty_group_heading {
+#noumugsayn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -379,15 +357,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#bvsnauirvr .gt_from_md > :first-child {
+#noumugsayn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bvsnauirvr .gt_from_md > :last-child {
+#noumugsayn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bvsnauirvr .gt_row {
+#noumugsayn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -406,7 +384,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#bvsnauirvr .gt_stub {
+#noumugsayn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -419,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bvsnauirvr .gt_stub_row_group {
+#noumugsayn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -433,15 +411,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#bvsnauirvr .gt_row_group_first td {
+#noumugsayn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bvsnauirvr .gt_row_group_first th {
+#noumugsayn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bvsnauirvr .gt_summary_row {
+#noumugsayn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -451,16 +429,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bvsnauirvr .gt_first_summary_row {
+#noumugsayn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_first_summary_row.thick {
+#noumugsayn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bvsnauirvr .gt_last_summary_row {
+#noumugsayn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -470,7 +448,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_grand_summary_row {
+#noumugsayn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -480,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bvsnauirvr .gt_first_grand_summary_row {
+#noumugsayn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -490,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_last_grand_summary_row_top {
+#noumugsayn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -500,11 +478,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_striped {
+#noumugsayn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bvsnauirvr .gt_table_body {
+#noumugsayn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -513,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_footnotes {
+#noumugsayn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -527,7 +505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_footnote {
+#noumugsayn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -536,7 +514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bvsnauirvr .gt_sourcenotes {
+#noumugsayn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -550,7 +528,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#bvsnauirvr .gt_sourcenote {
+#noumugsayn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -558,72 +536,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#bvsnauirvr .gt_left {
+#noumugsayn .gt_left {
   text-align: left;
 }
 
-#bvsnauirvr .gt_center {
+#noumugsayn .gt_center {
   text-align: center;
 }
 
-#bvsnauirvr .gt_right {
+#noumugsayn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bvsnauirvr .gt_font_normal {
+#noumugsayn .gt_font_normal {
   font-weight: normal;
 }
 
-#bvsnauirvr .gt_font_bold {
+#noumugsayn .gt_font_bold {
   font-weight: bold;
 }
 
-#bvsnauirvr .gt_font_italic {
+#noumugsayn .gt_font_italic {
   font-style: italic;
 }
 
-#bvsnauirvr .gt_super {
+#noumugsayn .gt_super {
   font-size: 65%;
 }
 
-#bvsnauirvr .gt_footnote_marks {
+#noumugsayn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bvsnauirvr .gt_asterisk {
+#noumugsayn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bvsnauirvr .gt_indent_1 {
+#noumugsayn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bvsnauirvr .gt_indent_2 {
+#noumugsayn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bvsnauirvr .gt_indent_3 {
+#noumugsayn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bvsnauirvr .gt_indent_4 {
+#noumugsayn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bvsnauirvr .gt_indent_5 {
+#noumugsayn .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bvsnauirvr .katex-display {
+#noumugsayn .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bvsnauirvr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#noumugsayn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -690,7 +668,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This is known as a tax cliff, where you pay a disproportionately high amount of tax for an extra dollar of income.</p>
 <p>To visualize the cliff, let’s look at a graph of how the annual IRMAA premiums vary by income.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>single <span class="ot">&lt;-</span> part_b_irmaa <span class="sc">%&gt;%</span> <span class="fu">filter</span>(filing <span class="sc">==</span> <span class="st">"single"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>single <span class="ot">&lt;-</span> irmaa <span class="sc">%&gt;%</span> <span class="fu">filter</span>(filing <span class="sc">==</span> <span class="st">"single"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(single, <span class="fu">aes</span>(<span class="at">x =</span> magi_low, <span class="at">xend =</span> magi_high, <span class="at">y =</span> total_premium <span class="sc">*</span> <span class="dv">12</span>)) <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
@@ -714,8 +692,572 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The five vertical jumps in the plots are the IRMAA cutoffs. Instead of the annual premium in dollars, we could look at the premium <em>rate</em>, the percentage of income that is paid in medicare premiums.</p>
-<p>This funny looking plot shows the</p>
+<p>The five vertical jumps in the plots are the IRMAA cutoffs.</p>
+<!--
+Instead of the annual premium in dollars, we could look at the premium *rate*, the percentage of income that is paid in medicare premiums.
+-->
+<p>Most of the tax code doesn’t work this way. Here are the 2025 federal income tax rates for single filers:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>single_income_rates <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>income_low, <span class="sc">~</span>income_high, <span class="sc">~</span>rate, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">0</span>, <span class="dv">11925</span>, <span class="fl">0.10</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">11926</span>, <span class="dv">48475</span>, <span class="fl">0.12</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">48476</span>, <span class="dv">103350</span>, <span class="fl">0.22</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">103351</span>, <span class="dv">197300</span>, <span class="fl">0.24</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">197301</span>, <span class="dv">250525</span>, <span class="fl">0.32</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">250526</span>, <span class="dv">626350</span>, <span class="fl">0.35</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">626351</span>, <span class="cn">Inf</span>, <span class="fl">0.37</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> print</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  income_low income_high  rate
+       &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1          0       11925  0.1 
+2      11926       48475  0.12
+3      48476      103350  0.22
+4     103351      197300  0.24
+5     197301      250525  0.32
+6     250526      626350  0.35
+7     626351         Inf  0.37</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gt</span>(single_income_rates)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="sdlumgblgs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#sdlumgblgs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sdlumgblgs thead, #sdlumgblgs tbody, #sdlumgblgs tfoot, #sdlumgblgs tr, #sdlumgblgs td, #sdlumgblgs th {
+  border-style: none;
+}
+
+#sdlumgblgs p {
+  margin: 0;
+  padding: 0;
+}
+
+#sdlumgblgs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#sdlumgblgs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sdlumgblgs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sdlumgblgs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sdlumgblgs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sdlumgblgs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sdlumgblgs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sdlumgblgs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sdlumgblgs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#sdlumgblgs .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#sdlumgblgs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sdlumgblgs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sdlumgblgs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sdlumgblgs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sdlumgblgs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdlumgblgs .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#sdlumgblgs .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#sdlumgblgs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#sdlumgblgs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdlumgblgs .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#sdlumgblgs .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdlumgblgs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sdlumgblgs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdlumgblgs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sdlumgblgs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdlumgblgs .gt_left {
+  text-align: left;
+}
+
+#sdlumgblgs .gt_center {
+  text-align: center;
+}
+
+#sdlumgblgs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sdlumgblgs .gt_font_normal {
+  font-weight: normal;
+}
+
+#sdlumgblgs .gt_font_bold {
+  font-weight: bold;
+}
+
+#sdlumgblgs .gt_font_italic {
+  font-style: italic;
+}
+
+#sdlumgblgs .gt_super {
+  font-size: 65%;
+}
+
+#sdlumgblgs .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#sdlumgblgs .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#sdlumgblgs .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#sdlumgblgs .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#sdlumgblgs .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#sdlumgblgs .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#sdlumgblgs .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#sdlumgblgs .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#sdlumgblgs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="income_low" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">income_low</th>
+<th id="income_high" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">income_high</th>
+<th id="rate" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">rate</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="income_low">0</td>
+<td class="gt_row gt_right" headers="income_high">11925</td>
+<td class="gt_row gt_right" headers="rate">0.10</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="income_low">11926</td>
+<td class="gt_row gt_right" headers="income_high">48475</td>
+<td class="gt_row gt_right" headers="rate">0.12</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="income_low">48476</td>
+<td class="gt_row gt_right" headers="income_high">103350</td>
+<td class="gt_row gt_right" headers="rate">0.22</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="income_low">103351</td>
+<td class="gt_row gt_right" headers="income_high">197300</td>
+<td class="gt_row gt_right" headers="rate">0.24</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="income_low">197301</td>
+<td class="gt_row gt_right" headers="income_high">250525</td>
+<td class="gt_row gt_right" headers="rate">0.32</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="income_low">250526</td>
+<td class="gt_row gt_right" headers="income_high">626350</td>
+<td class="gt_row gt_right" headers="rate">0.35</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="income_low">626351</td>
+<td class="gt_row gt_right" headers="income_high">Inf</td>
+<td class="gt_row gt_right" headers="rate">0.37</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ii <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">income =</span> <span class="dv">0</span><span class="sc">:</span><span class="fl">7e5</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show plot of income tax rates</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ii2 <span class="ot">&lt;-</span> ii <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">income_tax =</span> <span class="fl">0.1</span> <span class="sc">*</span> <span class="fu">pmin</span>(income, <span class="dv">11925</span>) <span class="sc">+</span> <span class="fl">0.12</span> <span class="sc">*</span> <span class="fu">pmin</span>(income <span class="sc">-</span> <span class="dv">11925</span>, <span class="dv">48476</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  print</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 700,001 × 2
+   income income_tax
+    &lt;int&gt;      &lt;dbl&gt;
+ 1      0     -1431 
+ 2      1     -1431.
+ 3      2     -1431.
+ 4      3     -1430.
+ 5      4     -1430.
+ 6      5     -1430.
+ 7      6     -1430.
+ 8      7     -1429.
+ 9      8     -1429.
+10      9     -1429.
+# ℹ 699,991 more rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    dd2 <span class="ot">&lt;-</span> dd <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    single <span class="sc">%&gt;%</span> <span class="fu">select</span>(magi_low, total_premium),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"magi"</span><span class="ot">=</span><span class="st">"magi_low"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>dd3 <span class="ot">&lt;-</span> dd2 <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(total_premium) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">annual_premium =</span> total_premium <span class="sc">*</span> <span class="dv">12</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">premium_rate =</span> annual_premium <span class="sc">/</span> magi</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    ) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <!-- So most beneficiaries pay \$185 x 12 = \$2,220 per year and *very* high earners pay \$628.90 x 12 = #\$7,546.8 per year for Medicare Part B. -->
 <p>Most beneficiaries</p>
 <section id="define-a-tax-cliff" class="level1">

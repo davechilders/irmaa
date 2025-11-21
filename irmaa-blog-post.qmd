@@ -19,6 +19,7 @@ library(tidyverse)
 library(gt)
 library(emoji)
 library(scales)
+library(irslimits) # grab data from 'irslimits' package
 ```
 
 some text here
@@ -43,39 +44,19 @@ d <- tribble(
 In 2025, \$185 is the lowest monthly premium for Part B Medicare Coverage. Individuals and couples with high incomes have to pay an income-related monthly adjustment amount (IRMAA).
 
 ```{r part_b_define}
-part_b <- tribble(
-  ~year, ~premium, ~deductible,
-  2024L, 174.70, 240,
-  2025L, 185.00, 257
-)
+# part_b <- tribble(
+#   ~year, ~premium, ~deductible,
+#   2024L, 174.70, 240,
+#   2025L, 185.00, 257
+# )
 
-# Based on MAGI
-part_b_irmaa <- tribble(
-  ~year, ~filing, ~magi_low, ~magi_high, ~adjustment,
-  # Part B - Single
-  2025, "single", 0, 106000, 0,
-  2025, "single", 106001, 133000, 74,
-  2025, "single", 133001, 167000, 185,
-  2025, "single", 167001, 200000, 295.90,
-  2025, "single", 200001, 500000, 406.90,
-  2025, "single", 500001, Inf, 443.90,
-  # Part B - MFJ
-  2025, "mfj", 0, 212000, 0,
-  2025, "mfj", 212001, 266000, 74,
-  2025, "mfj", 266001, 334000, 185,
-  2025, "mfj", 334001, 400000, 295.90,
-  2025, "mfj", 400001, 750000, 406.90,
-  2025, "mfj", 750001, Inf, 443.90,
-  # Part B - MFS
-  2025, "mfs", 0, 106000, 0,
-  2025, "mfs", 106001, 394000, 406.90,
-  2025, "mfs", 394001, Inf, 443.90,
-) %>%
-  mutate(total_premium = adjustment + part_b %>% filter(year == 2025) %>% pull(premium))
+data(premiums_b)
+
+
 ```
 
 ```{r irmaa_table}
-part_b_irmaa %>%
+irmaa %>%
   filter(filing == "single") %>%
   mutate(
     magi = paste(scales::dollar(magi_low), scales::dollar(magi_high), sep = " - "),
@@ -107,7 +88,7 @@ This is known as a tax cliff, where you pay a disproportionately high amount of 
 To visualize the cliff, let's look at a graph of how the annual IRMAA premiums vary by income.
 
 ```{r}
-single <- part_b_irmaa %>% filter(filing == "single")
+single <- irmaa %>% filter(filing == "single")
 
 ggplot(single, aes(x = magi_low, xend = magi_high, y = total_premium * 12)) +
   geom_segment() +
